@@ -1,18 +1,20 @@
 <script>
-	import {onValue, ref} from "firebase/database";
+	import {child, get, ref} from "firebase/database";
 	import {db} from "./database.js";
 
 	let roomId = 0
 	async function createRoom() {
 		var randomRoomId =  Math.floor(10000000 + Math.random() * 90000000);
 		const checkifexists = ref(db, 'Rooms/' + randomRoomId.toString());
-		onValue(checkifexists, (snapshot) => {
+		get(child(ref(db), `Rooms/${roomId}`)).then((snapshot) => {
 			if (snapshot.exists()){
 				createRoom()
 			}
 			else {
 				location.href = "/room/" + randomRoomId
 			}
+		}).catch((error) => {
+			console.error(error);
 		});
 	}
 </script>

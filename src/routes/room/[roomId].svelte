@@ -1,31 +1,21 @@
+<script>
+import {db} from "./database.js";
+import { ref, set, onValue, get, child} from "firebase/database";
+import { page } from '$app/stores';
+let roomid = $page.url.toString().split('/').pop()
+const roomChange = ref(db, "Rooms/"+roomid);
+let messages = {}
+let todos = {}
+let servertime = 0
 
-<script context="module">
-  import {db} from "./database.js";
-  import { ref, set } from "firebase/database";
-
-  let roomid = "0"
-  // const database = collection(db, "events")
-  // const phonenumbers = collection(db, "phonenumbers")
-  function reload(){
-    location.reload()
-  }
-  export async function load({params}) {
-    roomid = params.roomId
-    if (isNaN(roomid) || roomid.length != 8) {
-      return {
-        status: 302,
-        redirect: "/room/invalidId"
-      }
+onValue(roomChange, async function (snapshot) {
+    if (snapshot.exists()) {
+      console.log(await snapshot.val());
+      messages = await snapshot.val().Messages;
+      todos = await snapshot.val().Todos;
+      servertime = await snapshot.val().GlobalTimer;
     }
-		const refer = ref(db, 'Rooms/' + roomid);
-		onValue(refer, (snapshot) => {
-			if (!snapshot.exists()){
-				set(refer, {
-
-        })
-			}
-		});
-    // roomEvents = await getEvents(roomid)
-    return {}
-  }
-  </script>
+  })
+</script>
+<h1>{roomid}</h1>
+<h1>{messages}</h1>
