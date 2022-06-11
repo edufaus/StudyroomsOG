@@ -1,0 +1,77 @@
+{
+  ".svelte-kit/runtime/client/start.js": {
+    "file": "start-97845036.js",
+    "src": ".svelte-kit/runtime/client/start.js",
+    "isEntry": true,
+    "imports": [
+      "_index-3deea76a.js"
+    ],
+    "dynamicImports": [
+      "src/routes/__layout.svelte",
+      ".svelte-kit/runtime/components/error.svelte",
+      "src/routes/index.svelte",
+      "src/routes/room/[roomId].svelte",
+      "src/routes/room/invalidId.svelte"
+    ]
+  },
+  "src/routes/__layout.svelte": {
+    "file": "pages/__layout.svelte-59257d40.js",
+    "src": "src/routes/__layout.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-3deea76a.js"
+    ],
+    "css": [
+      "assets/pages/__layout.svelte-af65ef95.css"
+    ]
+  },
+  ".svelte-kit/runtime/components/error.svelte": {
+    "file": "error.svelte-4f9c0b78.js",
+    "src": ".svelte-kit/runtime/components/error.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-3deea76a.js"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "pages/index.svelte-e9536bf0.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-3deea76a.js",
+      "_database-d52f4668.js"
+    ],
+    "css": [
+      "assets/pages/index.svelte-153a291f.css"
+    ]
+  },
+  "src/routes/room/[roomId].svelte": {
+    "file": "pages/room/_roomId_.svelte-536b5916.js",
+    "src": "src/routes/room/[roomId].svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-3deea76a.js",
+      "_database-d52f4668.js"
+    ]
+  },
+  "src/routes/room/invalidId.svelte": {
+    "file": "pages/room/invalidId.svelte-7d8c7b9b.js",
+    "src": "src/routes/room/invalidId.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-3deea76a.js",
+      "_database-d52f4668.js"
+    ]
+  },
+  "_index-3deea76a.js": {
+    "file": "chunks/index-3deea76a.js"
+  },
+  "_database-d52f4668.js": {
+    "file": "chunks/database-d52f4668.js"
+  }
+}
