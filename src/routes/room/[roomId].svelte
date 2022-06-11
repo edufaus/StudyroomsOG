@@ -2,20 +2,48 @@
 import {db} from "./database.js";
 import { ref, set, onValue, get, child} from "firebase/database";
 import { page } from '$app/stores';
+import { goto } from '$app/navigation';
+import { onMount } from 'svelte';
+import Chat from "../../components/Chat.svelte";
 let roomid = $page.url.toString().split('/').pop()
-const roomChange = ref(db, "Rooms/"+roomid);
+onMount(async () => {
+    if (isNaN(roomid) || roomid.length != 8) {
+        goto("/room/invalidId")
+      }
+      else {
+        get(child(ref(db), `Rooms/${roomid}`)).then((snapshot) => {
+          if (!snapshot.exists()) {
+              set(ref(db, 'Rooms/' + roomid), {
+                  "GlobalTimer": 0,
+                  "Todos": {
+                      "ignor": ""
+                  },
+                  "Messages": {
+                      "ignor": ""
+                  }
+              })
+          }
+      }).catch((error) => {
+          console.error(error);
+      });
+      }
+	});
 let messages = {}
 let todos = {}
 let servertime = 0
 
+
+
+const roomChange = ref(db, "Rooms/"+roomid);
 onValue(roomChange, async function (snapshot) {
     if (snapshot.exists()) {
       console.log(await snapshot.val());
       messages = await snapshot.val().Messages;
+      delete messages["ignor"]
       todos = await snapshot.val().Todos;
+      delete todos["ignor"]
       servertime = await snapshot.val().GlobalTimer;
     }
   })
 </script>
-<h1>{roomid}</h1>
-<h1>{messages}</h1>
+<Chat messages={messages} db={db} roomid={roomid}></Chat>
