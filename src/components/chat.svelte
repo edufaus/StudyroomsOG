@@ -4,6 +4,7 @@
     export let messages = {}
     export let db;
     export let roomid;
+    export let username = "eduard faus"
     let message = "";
     let sortmes = "";
     function sortmessages() {
@@ -17,7 +18,7 @@
         let tempmes = messages
 
         set(ref(db, "Rooms/"+roomid+"/Messages/"+genid()), {
-            "User":"eduard faus",
+            "User":username,
             "Message": message,
             "Time": Date.now()
         })

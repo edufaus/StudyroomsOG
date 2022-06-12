@@ -1,11 +1,16 @@
 <script>
 import {db} from "./database.js";
+
 import { ref, set, onValue, get, child} from "firebase/database";
 import { page } from '$app/stores';
 import { goto } from '$app/navigation';
 import { onMount } from 'svelte';
+
 import Chat from "../../components/Chat.svelte";
+import Todos from "../../components/Todos.svelte";
+
 let roomid = $page.url.toString().split('/').pop()
+
 onMount(async () => {
     if (isNaN(roomid) || roomid.length != 8) {
         goto("/room/invalidId")
@@ -31,9 +36,6 @@ onMount(async () => {
 let messages = {}
 let todos = {}
 let servertime = 0
-
-
-
 const roomChange = ref(db, "Rooms/"+roomid);
 onValue(roomChange, async function (snapshot) {
     if (snapshot.exists()) {
@@ -47,3 +49,4 @@ onValue(roomChange, async function (snapshot) {
   })
 </script>
 <Chat messages={messages} db={db} roomid={roomid}></Chat>
+<Todos todos={todos} db={db} roomid={roomid}></Todos>

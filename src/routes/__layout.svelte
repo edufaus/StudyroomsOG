@@ -12,7 +12,7 @@
 </footer> -->
 
 <style>
-	:global() {
+	/* :global() {
 		background-color: #f2eee2;
 		color: #0084f6;
 		transition: background-color 0.3s
@@ -44,5 +44,5 @@
 		footer {
 			padding: 40px 0;
 		}
-	}
+	} */
 </style>

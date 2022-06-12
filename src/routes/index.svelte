@@ -1,6 +1,23 @@
+
+<!-- 
+<div id="aboutme" class="is-halfheight is-half" style="height:50%;">
+    <br>
+    <br>
+    <div class="columns is- half is-halfheight is-desktop">
+        <div class="column">
+            <figure class="image is-16x16 is-size-6" style=" height: auto; width: auto; max-width: 100%; max-height: 100%;">
+                <img alt="me" src="https://media.discordapp.net/attachments/984119111015628890/985273162533052416/bg-01.jpg?width=515&height=671">
+            </figure>
+            </div>
+        </div>
+        <div class="columns is-half is-halfheight is-mobile">
+            Hello
+        </div>
+</div> -->
 <script>
 	import {db} from "./room/database.js";
 	import {ref, get, child} from "firebase/database";
+	import {AudioPlayer} from 'svelte-mp3';
 	// import { Player } from 'svelte-react-player';
 	let roomId = 0
 	async function createRoom() {
@@ -19,121 +36,24 @@
 	}
 </script>
 
-<!-- <svelte:head>
-	<title>Home</title>
-</svelte:head> -->
-
-
-<section>
-	<!-- <p>Hello World</p> -->
-	<!-- <Player url = "https://www.youtube.com/watch?v=5qap5aO4i9A" /> -->
-	<!-- <audio controls>
-		<source src = "https://coderadio-admin.freecodecamp.org/radio/8010/radio.mp3" type = "audio/mpeg">
-	</audio> -->
-	<div class="nav">
-		<!-- <GoogleAuthProvider/> -->
-	</div>
-	<!-- <div class="columns is-mobile is-vcentered">
-		<div class="side-image">
-			<img src="https://media.discordapp.net/attachments/984119111015628890/985273162533052416/bg-01.jpg?width=515&height=671" alt = "image" >
-		</div>
-		<div class="column">
-			<div class="upper-part">
-				<h1>We Study</h1>
-				<h2 class="below-text">Plan with others</h2>
-			</div>
-			-->
-			<!-- <div class="box-createRoom">
-				<div class="button" on:click={createRoom}>Create Room</div>
-				<div class="input-createRoom"><input maxlength="8" type="number" placeholder="RoomId" blind:value={roomId}></div>
-				<a href={"/room/" + roomId}><div class="button">Join Room</div></a>
-			</div> -->
-				<!--
-		</div>
-	</div>  -->
-	<!-- <div class="bg-image" 
-	style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/77.jpg');
-		   width: 50vh;">
-</div> -->
-<div id="leftHalf"></div>
-			<div class="box-createRoom">
-<div id="rightHalf">
-		<div class="box columns is-vcentered">
-				<div class="button" on:click={createRoom}>Create Room</div>
-				<div class="input-createRoom"><input maxlength="8" type="number" placeholder="RoomId" blind:value={roomId}></div>
-				<a href={"/room/" + roomId}><div class="button">Join Room</div></a>
-			</div>
+<div class="columns is-half box is-centered is-vcentered has-text-centered">
+    <div class="column">
+        <figure class="image is-16x16 is-size-6" style=" height: auto; width: auto; max-width: 100%; max-height: 100%;">
+            <img alt="me" src="https://media.discordapp.net/attachments/984119111015628890/985273162533052416/bg-01.jpg?width=515&height=671">
+        </figure>
+    </div>
+    <div class="column">
+        <div class="box">
+           <input class="input" maxlength="8" type="number" placeholder="RoomId" blind:value={roomId}>
+            <a href={"/room/" + roomId}><div class="button">Join Room</div></a>
+            <div class="button" on:click={createRoom}>Generate Room</div>
+        </div>
 			<audio controls>
 				<source src = "https://coderadio-admin.freecodecamp.org/radio/8010/radio.mp3" type = "audio/mpeg">
+			</audio>
+            <audio controls>
+				<source src = "https://www1.morexlusive.com/wp-content/uploads/2022/01/Future_-_Mask_Off.mp3" type = "audio/mpeg">
 			</audio> 
-</div>
-</section>
-<style>
-	.hero-bg {
-  background: url(https://placeimg.com/1000/1000/any);
-  min-height: 100vh;
-}
-.hero.is-fullheight > .columns {
-  flex: 1;
-}
-
-.hero.is-fullheight > .columns > .column {
-  display: flex;
-}
-
-
-	.Container .side-image {
-		margin-right: 5%;
-		margin-top: -5%;
-		margin-left: -20%;
-		padding: 0;
-		height: 100%;
-		width: 100%;
-	}
-
-	.upper-part {
-		text-align: center;
-		color: #324D67;
-		font-size: 1.5rem;
-	}
-
-	h1 {
-		margin-bottom: 10px;
-	}
-
-	h2 {
-		margin-bottom: 10px;
-	}
-
-	.box-createRoom {
-		align-items: center;
-		justify-content: center;
-		text-align: center;
-		background-color: #324D67;
-		/* width: 40%; */
-	}
-
-	/* img {
-		height: 100vh;
-		width: 300px;
-	} */
-	
-	.Container {
-		display: flex;
-	}
-	#leftHalf {
-   background-image: url("https://media.discordapp.net/attachments/984119111015628890/985273162533052416/bg-01.jpg?width=515&height=671");
-   width: 50%;
-   position: absolute;
-   left: 0px;
-   height: 100%;
-}
-
-#rightHalf {
-
-   width: 50%;
-   position: absolute;
-   right: 0px;
-   height: 100%;
-}
-</style>
+			<!-- <AudioPlayer urls="https://coderadio-admin.freecodecamp.org/radio/8010/radio.mp3"> </AudioPlayer> -->
+    </div>
+    </div>
