@@ -11,6 +11,7 @@
     "format": "prettier --write --plugin-search-dir=. ."
   },
   "devDependencies": {
+    "@beyonk/svelte-social-auth": "^3.0.0",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
     "prettier": "^2.5.1",
@@ -20,7 +21,9 @@
   "type": "module",
   "dependencies": {
     "@bytemd/plugin-gfm": "^1.15.0",
+    "@types/node": "^17.0.42",
     "bulma-calendar": "^6.1.18",
+    "dotenv": "^16.0.1",
     "firebase": "^9.8.1",
     "snarkdown": "^2.0.0",
     "svelte-mp3": "^1.2.0",
