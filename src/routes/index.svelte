@@ -17,8 +17,8 @@
     import { db } from "./room/database.js";
     import { ref, get, child } from "firebase/database";
     import { GAUTH } from "../functions/verification";
-	import dotenv from 'dotenv';
-	dotenv.config();
+	import { config } from 'dotenv';
+	config();
     // import { Player } from 'svelte-react-player';
     let roomId = 0;
     async function createRoom() {
