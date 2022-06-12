@@ -1,1 +1,0 @@
-import{S as e,i as s,s as n}from"../../chunks/index-3deea76a.js";import"../../chunks/database-d52f4668.js";let t="0";async function l({params:o}){return t=o.roomId,isNaN(t)||t.length!=8?{status:302,redirect:"/room/invalidId"}:{}}class u extends e{constructor(r){super(),s(this,r,null,null,n,{})}}export{u as default,l as load};

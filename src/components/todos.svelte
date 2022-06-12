@@ -13,7 +13,10 @@
         if (username in  todos) {
             temp = todos[username]
         }
-        temp[genid()] = todotext
+        temp[genid()] = {
+            text: todotext,
+            done: false
+        }
         set(ref(db, "Rooms/"+roomid+"/Todos/"+username), temp)
     }
     console.log(todos)
@@ -25,7 +28,7 @@
         <h1 class="title">{key}</h1>
         <hr>
         {#each Object.entries(value) as [k, v]}
-        {v}
+        {v.text} 
         <br>
         {/each}
     </div>

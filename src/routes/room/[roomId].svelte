@@ -6,8 +6,8 @@ import { page } from '$app/stores';
 import { goto } from '$app/navigation';
 import { onMount } from 'svelte';
 
-import Chat from "../../components/Chat.svelte";
-import Todos from "../../components/Todos.svelte";
+import Chat from "../../components/chat.svelte";
+import Todos from "../../components/todos.svelte";
 
 let roomid = $page.url.toString().split('/').pop()
 

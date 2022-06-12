@@ -1,3 +1,5 @@
+function noop() {
+}
 function run(fn) {
   return fn();
 }
@@ -6,6 +8,13 @@ function blank_object() {
 }
 function run_all(fns) {
   fns.forEach(run);
+}
+function subscribe(store, ...callbacks) {
+  if (store == null) {
+    return noop;
+  }
+  const unsub = store.subscribe(...callbacks);
+  return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
 let current_component;
 function set_current_component(component) {
@@ -20,6 +29,9 @@ function setContext(key, context) {
   get_current_component().$$.context.set(key, context);
   return context;
 }
+function getContext(key) {
+  return get_current_component().$$.context.get(key);
+}
 Promise.resolve();
 const escaped = {
   '"': "&quot;",
@@ -33,6 +45,13 @@ function escape(html) {
 }
 function escape_attribute_value(value) {
   return typeof value === "string" ? escape(value) : value;
+}
+function each(items, fn) {
+  let str = "";
+  for (let i = 0; i < items.length; i += 1) {
+    str += fn(items[i], i);
+  }
+  return str;
 }
 const missing_component = {
   $$render: () => ""
@@ -86,4 +105,4 @@ function add_attribute(name, value, boolean) {
   const assignment = boolean && value === true ? "" : `="${escape_attribute_value(value.toString())}"`;
   return ` ${name}${assignment}`;
 }
-export { add_attribute as a, create_ssr_component as c, escape as e, missing_component as m, setContext as s, validate_component as v };
+export { add_attribute as a, each as b, create_ssr_component as c, subscribe as d, escape as e, getContext as g, missing_component as m, setContext as s, validate_component as v };

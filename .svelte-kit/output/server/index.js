@@ -29,7 +29,7 @@ var __objRest = (source, exclude) => {
     }
   return target;
 };
-import { c as create_ssr_component, s as setContext, v as validate_component, m as missing_component } from "./chunks/index-2835083a.js";
+import { c as create_ssr_component, s as setContext, v as validate_component, m as missing_component } from "./chunks/index-6db6ab93.js";
 function afterUpdate() {
 }
 const Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -532,9 +532,9 @@ function sha256(data) {
   if (!key[0])
     precompute();
   const out = init.slice(0);
-  const array = encode$1(data);
-  for (let i = 0; i < array.length; i += 16) {
-    const w = array.subarray(i, i + 16);
+  const array2 = encode$1(data);
+  for (let i = 0; i < array2.length; i += 16) {
+    const w = array2.subarray(i, i + 16);
     let tmp;
     let a;
     let b;
@@ -651,25 +651,10 @@ function base64(bytes) {
   return result;
 }
 let csp_ready;
-let generate_nonce;
-let generate_hash;
-if (typeof crypto !== "undefined") {
-  const array = new Uint8Array(16);
-  generate_nonce = () => {
-    crypto.getRandomValues(array);
-    return base64(array);
-  };
-  generate_hash = sha256;
-} else {
-  const name = "crypto";
-  csp_ready = import(name).then((crypto2) => {
-    generate_nonce = () => {
-      return crypto2.randomBytes(16).toString("base64");
-    };
-    generate_hash = (input) => {
-      return crypto2.createHash("sha256").update(input, "utf-8").digest().toString("base64");
-    };
-  });
+const array = new Uint8Array(16);
+function generate_nonce() {
+  crypto.getRandomValues(array);
+  return base64(array);
 }
 const quoted = /* @__PURE__ */ new Set([
   "self",
@@ -715,7 +700,7 @@ class Csp {
   add_script(content) {
     if (this.#script_needs_csp) {
       if (this.#use_hashes) {
-        this.#script_src.push(`sha256-${generate_hash(content)}`);
+        this.#script_src.push(`sha256-${sha256(content)}`);
       } else if (this.#script_src.length === 0) {
         this.#script_src.push(`nonce-${this.nonce}`);
       }
@@ -724,7 +709,7 @@ class Csp {
   add_style(content) {
     if (this.#style_needs_csp) {
       if (this.#use_hashes) {
-        this.#style_src.push(`sha256-${generate_hash(content)}`);
+        this.#style_src.push(`sha256-${sha256(content)}`);
       } else if (this.#style_src.length === 0) {
         this.#style_src.push(`nonce-${this.nonce}`);
       }
@@ -786,12 +771,12 @@ async function render_response({
   resolve_opts,
   stuff
 }) {
-  if (state.prerender) {
+  if (state.prerendering) {
     if (options.csp.mode === "nonce") {
       throw new Error('Cannot use prerendering if config.kit.csp.mode === "nonce"');
     }
     if (options.template_contains_nonce) {
-      throw new Error("Cannot use prerendering if page template contains %svelte.nonce%");
+      throw new Error("Cannot use prerendering if page template contains %sveltekit.nonce%");
     }
   }
   const stylesheets = new Set(options.manifest._.entry.css);
@@ -839,7 +824,7 @@ async function render_response({
         routeId: event.routeId,
         status,
         stuff,
-        url: state.prerender ? create_prerendering_url_proxy(event.url) : event.url
+        url: state.prerendering ? create_prerendering_url_proxy(event.url) : event.url
       },
       components: branch.map(({ node }) => node.module.default)
     };
@@ -865,7 +850,7 @@ async function render_response({
   await csp_ready;
   const csp = new Csp(options.csp, {
     dev: options.dev,
-    prerender: !!state.prerender,
+    prerender: !!state.prerendering,
     needs_nonce: options.template_contains_nonce
   });
   const target = hash(body);
@@ -883,9 +868,7 @@ async function render_response({
 			hydrate: ${resolve_opts.ssr && page_config.hydrate ? `{
 				status: ${status},
 				error: ${serialize_error(error2)},
-				nodes: [
-					${(branch || []).map(({ node }) => `import(${s(options.prefix + node.entry)})`).join(",\n						")}
-				],
+				nodes: [${branch.map(({ node }) => node.index).join(", ")}],
 				params: ${devalue(event.params)},
 				routeId: ${s(event.routeId)}
 			}` : "null"}
@@ -942,7 +925,7 @@ async function render_response({
     head += `
 			<script${csp.script_needs_nonce ? ` nonce="${csp.nonce}"` : ""}>${init_service_worker}<\/script>`;
   }
-  if (state.prerender) {
+  if (state.prerendering) {
     const http_equiv = [];
     const csp_headers = csp.get_meta();
     if (csp_headers) {
@@ -970,7 +953,7 @@ async function render_response({
   if (!options.floc) {
     headers.set("permissions-policy", "interest-cohort=()");
   }
-  if (!state.prerender) {
+  if (!state.prerendering) {
     const csp_header = csp.get_header();
     if (csp_header) {
       headers.set("content-security-policy", csp_header);
@@ -1312,24 +1295,15 @@ function normalize(loaded) {
   }
   if (loaded.redirect) {
     if (!loaded.status || Math.floor(loaded.status / 100) !== 3) {
-      return {
-        status: 500,
-        error: new Error('"redirect" property returned from load() must be accompanied by a 3xx status code')
-      };
+      throw new Error('"redirect" property returned from load() must be accompanied by a 3xx status code');
     }
     if (typeof loaded.redirect !== "string") {
-      return {
-        status: 500,
-        error: new Error('"redirect" property returned from load() must be a string')
-      };
+      throw new Error('"redirect" property returned from load() must be a string');
     }
   }
   if (loaded.dependencies) {
     if (!Array.isArray(loaded.dependencies) || loaded.dependencies.some((dep) => typeof dep !== "string")) {
-      return {
-        status: 500,
-        error: new Error('"dependencies" property returned from load() must be of type string[]')
-      };
+      throw new Error('"dependencies" property returned from load() must be of type string[]');
     }
   }
   if (loaded.context) {
@@ -1410,7 +1384,8 @@ async function load_node({
   const cookies = parse_1(event.request.headers.get("cookie") || "");
   const new_cookies = [];
   let loaded;
-  const shadow = is_leaf ? await load_shadow_data(route, event, options, !!state.prerender) : {};
+  const should_prerender = node.module.prerender ?? options.prerender.default;
+  const shadow = is_leaf ? await load_shadow_data(route, event, options, should_prerender) : {};
   if (shadow.cookies) {
     shadow.cookies.forEach((header) => {
       new_cookies.push(parseString_1(header));
@@ -1428,11 +1403,14 @@ async function load_node({
     };
   } else if (module.load) {
     const load_input = {
-      url: state.prerender ? create_prerendering_url_proxy(event.url) : event.url,
+      url: state.prerendering ? create_prerendering_url_proxy(event.url) : event.url,
       params: event.params,
       props: shadow.body || {},
       routeId: event.routeId,
       get session() {
+        if (node.module.prerender ?? options.prerender.default) {
+          throw Error("Attempted to access session from a prerendered page. Session would never be populated.");
+        }
         uses_credentials = true;
         return $session;
       },
@@ -1501,12 +1479,12 @@ async function load_node({
           if (opts.body && typeof opts.body !== "string") {
             throw new Error("Request body must be a string");
           }
-          response = await respond(new Request(new URL(requested, event.url).href, __spreadProps(__spreadValues({}, opts), { credentials: void 0 })), options, __spreadProps(__spreadValues({}, state), {
+          response = await respond(new Request(new URL(requested, event.url).href, __spreadValues({}, opts)), options, __spreadProps(__spreadValues({}, state), {
             initiator: route
           }));
-          if (state.prerender) {
+          if (state.prerendering) {
             dependency = { response, body: null };
-            state.prerender.dependencies.set(resolved, dependency);
+            state.prerendering.dependencies.set(resolved, dependency);
           }
         } else {
           if (resolved.startsWith("//")) {
@@ -1600,13 +1578,13 @@ async function load_node({
   } else {
     loaded = {};
   }
-  if (shadow.body && state.prerender) {
+  if (shadow.body && state.prerendering) {
     const pathname = `${event.url.pathname.replace(/\/$/, "")}/__data.json`;
     const dependency = {
       response: new Response(void 0),
       body: JSON.stringify(shadow.body)
     };
-    state.prerender.dependencies.set(pathname, dependency);
+    state.prerendering.dependencies.set(pathname, dependency);
   }
   return {
     node,
@@ -1809,8 +1787,8 @@ async function respond$1(opts) {
   }
   const leaf = nodes[nodes.length - 1].module;
   let page_config = get_page_config(leaf, options);
-  if (state.prerender) {
-    const should_prerender = leaf.prerender ?? state.prerender.default;
+  if (state.prerendering) {
+    const should_prerender = leaf.prerender ?? options.prerender.default;
     if (!should_prerender) {
       return new Response(void 0, {
         status: 204
@@ -2016,7 +1994,7 @@ function exec(match, names, types, matchers) {
 const DATA_SUFFIX = "/__data.json";
 const default_transform = ({ html }) => html;
 async function respond(request, options, state) {
-  var _a, _b, _c;
+  var _a, _b, _c, _d;
   let url = new URL(request.url);
   const { parameter, allowed } = options.method_override;
   const method_override = (_a = url.searchParams.get(parameter)) == null ? void 0 : _a.toUpperCase();
@@ -2044,7 +2022,7 @@ async function respond(request, options, state) {
   let decoded = decodeURI(url.pathname);
   let route = null;
   let params = {};
-  if (options.paths.base && !((_b = state.prerender) == null ? void 0 : _b.fallback)) {
+  if (options.paths.base && !((_b = state.prerendering) == null ? void 0 : _b.fallback)) {
     if (!decoded.startsWith(options.paths.base)) {
       return new Response(void 0, { status: 404 });
     }
@@ -2052,10 +2030,11 @@ async function respond(request, options, state) {
   }
   const is_data_request = decoded.endsWith(DATA_SUFFIX);
   if (is_data_request) {
-    decoded = decoded.slice(0, -DATA_SUFFIX.length) || "/";
-    url = new URL(url.origin + url.pathname.slice(0, -DATA_SUFFIX.length) + url.search);
+    const data_suffix_length = DATA_SUFFIX.length - (options.trailing_slash === "always" ? 1 : 0);
+    decoded = decoded.slice(0, -data_suffix_length) || "/";
+    url = new URL(url.origin + url.pathname.slice(0, -data_suffix_length) + url.search);
   }
-  if (!state.prerender || !state.prerender.fallback) {
+  if (!((_c = state.prerendering) == null ? void 0 : _c.fallback)) {
     const matchers = await options.manifest._.matchers();
     for (const candidate of options.manifest._.routes) {
       const match = candidate.pattern.exec(decoded);
@@ -2069,15 +2048,21 @@ async function respond(request, options, state) {
       }
     }
   }
-  if ((route == null ? void 0 : route.type) === "page") {
-    const normalized = normalize_path(url.pathname, options.trailing_slash);
-    if (normalized !== url.pathname && !((_c = state.prerender) == null ? void 0 : _c.fallback)) {
+  if (route) {
+    if (route.type === "page") {
+      const normalized = normalize_path(url.pathname, options.trailing_slash);
+      if (normalized !== url.pathname && !((_d = state.prerendering) == null ? void 0 : _d.fallback)) {
+        return new Response(void 0, {
+          status: 301,
+          headers: {
+            "x-sveltekit-normalize": "1",
+            location: (normalized.startsWith("//") ? url.origin + normalized : normalized) + (url.search === "?" ? "" : url.search)
+          }
+        });
+      }
+    } else if (is_data_request) {
       return new Response(void 0, {
-        status: 301,
-        headers: {
-          "x-sveltekit-normalize": "1",
-          location: (normalized.startsWith("//") ? url.origin + normalized : normalized) + (url.search === "?" ? "" : url.search)
-        }
+        status: 404
       });
     }
   }
@@ -2126,13 +2111,14 @@ async function respond(request, options, state) {
     const response = await options.hooks.handle({
       event,
       resolve: async (event2, opts) => {
+        var _a2;
         if (opts) {
           resolve_opts = {
             ssr: opts.ssr !== false,
             transformPage: opts.transformPage || default_transform
           };
         }
-        if (state.prerender && state.prerender.fallback) {
+        if ((_a2 = state.prerendering) == null ? void 0 : _a2.fallback) {
           return await render_response({
             event: event2,
             options,
@@ -2209,7 +2195,7 @@ async function respond(request, options, state) {
             resolve_opts
           });
         }
-        if (state.prerender) {
+        if (state.prerendering) {
           return new Response("not found", { status: 404 });
         }
         return await fetch(request);
@@ -2252,7 +2238,7 @@ function set_paths(paths) {
 }
 function set_prerendering(value) {
 }
-const template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		' + head + "\n	</head>\n	<body>\n		<div>" + body + "</div>\n	</body>\n</html>\n";
+const template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		<meta name="monetization" content="$ilp.uphold.com/egpErgzkYGw6">\n		' + head + "\n	</head>\n	<body>\n		<div>" + body + "</div>\n	</body>\n</html>\n";
 let read = null;
 set_paths({ "base": "", "assets": "" });
 let default_protocol = "https";
@@ -2284,8 +2270,11 @@ class Server {
       manifest,
       method_override: { "parameter": "_method", "allowed": [] },
       paths: { base, assets },
-      prefix: assets + "/_app/",
-      prerender: true,
+      prefix: assets + "/_app/immutable/",
+      prerender: {
+        default: false,
+        enabled: true
+      },
       read,
       root: Root,
       service_worker: null,

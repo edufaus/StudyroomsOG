@@ -1,4 +1,4 @@
-import { c as create_ssr_component, a as add_attribute } from "../../../chunks/index-2835083a.js";
+import { c as create_ssr_component, a as add_attribute } from "../../../chunks/index-6db6ab93.js";
 import "firebase/database";
 import "../../endpoints/room/database.js";
 import "firebase/app";
