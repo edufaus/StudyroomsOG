@@ -19,7 +19,7 @@ import Music from "../../components/music.svelte";
 import Login from "../../components/login.svelte";
 import Money from "../../components/money.svelte";
 import Ad from "../../components/ad.svelte";
-import Sms from "../../components/sms.svelte";
+import Sms from "../../components/SMS.svelte";
 
 let user = null;
 
