@@ -17,7 +17,7 @@ We used the following functionalities to develop our project-
  - Svelte
  - JavaScript
  - HTML
- - CSS
+ - Bulma CSS
  - Google Firebase
 
 # How it works ⚙️

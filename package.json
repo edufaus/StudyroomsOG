@@ -22,12 +22,7 @@
   "type": "module",
   "dependencies": {
     "@bytemd/plugin-gfm": "^1.15.0",
-    "@sendgrid/mail": "^7.7.0",
-    "bulma-calendar": "^6.1.18",
     "firebase": "^9.8.1",
-    "snarkdown": "^2.0.0",
-    "twilio": "^3.77.2",
-    "twilio-client-mirror": "^0.0.2",
     "uuid": "^8.3.2"
   }
 }

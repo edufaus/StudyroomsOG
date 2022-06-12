@@ -19,6 +19,8 @@ import Music from "../../components/music.svelte";
 import Login from "../../components/login.svelte";
 import Money from "../../components/money.svelte";
 import Ad from "../../components/ad.svelte";
+import Sms from "../../components/sms.svelte";
+
 let user = null;
 
 let roomid = $page.url.toString().split('/').pop().replace(/\?/g,'')
@@ -68,7 +70,7 @@ onValue(roomChange, async function (snapshot) {
 
 <br>
 <h1 class="title has-text-centered is-1">Your Room Code Is {roomid} <Login bind:resultuser={user}></Login></h1> 
-<div class="tile is-ancestor ">
+<div class="tile is-ancestor is-flex-wrap-wrap">
   <div class="tile is-4 is-vertical is-parent">
     <div class="tile is-child box">
     <Timer></Timer>
@@ -78,25 +80,39 @@ onValue(roomChange, async function (snapshot) {
      <Music></Music>
     </div>
   </div>
-  <div class="tile is-parent">
+  <div class="tile is-parent is-vertical is-4">
     <div class="tile is-child box">
       <Todos user={user} todos={todos} db={db} roomid={roomid}></Todos>
     </div>
   </div>
-  <div class="tile is-parent">
+  <div class="tile is-parent is-3">
     <div class="tile is-child box">
       <Chat class='column' user={user} messages={messages} db={db} roomid={roomid}></Chat>
+    </div>
+  </div>
+  <div class="tile is-parent">
+    <div class="tile is-child box">
+      <Sms bind:user={user} bind:roomid={roomid}></Sms>
     </div>
   </div>
 </div>
 <Money let:isLoading let:isMonetized>
   {#if isLoading}
-    <div><p class="title is-4">Loading/p></div>
+    <div><p class="title is-4">Loading</p></div>
   {:else if isMonetized}
     <div>No Ads :D</div>
   {:else}
+  <div>
     <h1 class="Title is-4">Make a coil account to Remove Ads </h1>
+    <figure style="max-height=20vh" class="image is-16by9 has-text-centered center">
+      <img
+        style=""
+        src="https://media.discordapp.net/attachments/984119111015628890/985662466375712848/unknown.png?width=974&height=500"
+      />
+    </figure>
     <Ad></Ad>
+  </div>
+ 
   {/if}
 </Money>
 <style>
@@ -105,5 +121,11 @@ onValue(roomChange, async function (snapshot) {
   flex-wrap: wrap;
   align-content: center; /* used this for multiple child */
   align-items: center; /* if an only child */
+}
+.image img {
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    object-fit: fill;
 }
   </style>
