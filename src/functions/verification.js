@@ -1,6 +1,6 @@
-import { GoogleAuthProvider, getAuth, firebase, signInWithPopup } from  'firebase/auth';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from  'firebase/auth';
 
-async function GAUTH() {
+export async function GAUTH() {
     const provider = new GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/cloud-platform.read-only'); //Get read only data such as profile picture and name / email :)
     const auth = getAuth();
@@ -10,7 +10,9 @@ async function GAUTH() {
     .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken; // Access token for all of the juicy stuff such as name and pfp of the google account
-        const user = result.user; 
+        const user = result.user;
+        // All stuff need to be stored local cache
+        console.log(user.email);
     }).catch((error) => {
         const errorCode = error.code; // Debugging
         const errorMessage = error.message; // Debugging

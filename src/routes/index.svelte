@@ -17,7 +17,7 @@
 <script>
 	import {db} from "./room/database.js";
 	import {ref, get, child} from "firebase/database";
-	import {AudioPlayer} from 'svelte-mp3';
+	import {GAUTH} from '../functions/verification';
 	// import { Player } from 'svelte-react-player';
 	let roomId = 0
 	async function createRoom() {
@@ -42,11 +42,13 @@
             <img alt="me" src="https://media.discordapp.net/attachments/984119111015628890/985273162533052416/bg-01.jpg?width=515&height=671">
         </figure>
     </div>
+	
     <div class="column">
         <div class="box">
            <input class="input" maxlength="8" type="number" placeholder="RoomId" blind:value={roomId}>
             <a href={"/room/" + roomId}><div class="button">Join Room</div></a>
             <div class="button" on:click={createRoom}>Generate Room</div>
+			<div class = "button" on:click={GAUTH}>Authentication</div>
         </div>
 			<audio controls>
 				<source src = "https://coderadio-admin.freecodecamp.org/radio/8010/radio.mp3" type = "audio/mpeg">

@@ -28,7 +28,7 @@ const page = {
     return store.subscribe(fn);
   }
 };
-var Chat_svelte_svelte_type_style_lang = /* @__PURE__ */ (() => ".box.svelte-1tez4ab{border-radius:50px}")();
+var chat_svelte_svelte_type_style_lang = /* @__PURE__ */ (() => ".box.svelte-1tez4ab{border-radius:50px}")();
 const css = {
   code: ".box.svelte-1tez4ab{border-radius:50px}",
   map: null
