@@ -49,6 +49,8 @@ onValue(roomChange, async function (snapshot) {
     }
   })
 </script>
-<Chat messages={messages} db={db} roomid={roomid}></Chat>
+<div class="rows">
+  <Chat messages={messages} db={db} roomid={roomid}></Chat>
 <Todos todos={todos} db={db} roomid={roomid}></Todos>
 <Timer></Timer>
+</div>
