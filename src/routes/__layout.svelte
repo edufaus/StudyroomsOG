@@ -2,6 +2,8 @@
 <!-- <Header /> -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 <main>
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8897569169223812"
+     crossorigin="anonymous"></script>s
 	<slot />
 </main>
 
