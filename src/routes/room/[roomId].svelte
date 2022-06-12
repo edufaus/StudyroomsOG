@@ -18,6 +18,7 @@ import Timer from "../../components/timer.svelte";
 import Music from "../../components/music.svelte";
 import Login from "../../components/login.svelte";
 import Money from "../../components/money.svelte";
+import Ad from "../../components/ad.svelte";
 let user = null;
 
 let roomid = $page.url.toString().split('/').pop().replace(/\?/g,'')
@@ -97,14 +98,7 @@ onValue(roomChange, async function (snapshot) {
           <div>No Ads :D</div>
         {:else}
           <h1 class="Title is-4">Make a coil account to Remove Ads </h1>
-          <amp-ad width="100vw" height="320"
-     type="adsense"
-     data-ad-client="ca-pub-8897569169223812"
-     data-ad-slot="8144861906"
-     data-auto-format="rspv"
-     data-full-width="">
-  <div overflow=""></div>
-</amp-ad>
+          <Ad></Ad>
         {/if}
       </Money>
     </div>
