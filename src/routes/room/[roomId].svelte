@@ -11,12 +11,13 @@ import { page } from '$app/stores';
 import { goto } from '$app/navigation';
 import { onMount } from 'svelte';
 import { browser } from '$app/env';
-
+// import { sendMessage } from '../../functions/SMS.js';
 import Chat from "../../components/chat.svelte";
 import Todos from "../../components/todos.svelte";
 import Timer from "../../components/timer.svelte";
 import Music from "../../components/music.svelte";
 import Login from "../../components/login.svelte";
+import Money from "../../components/money.svelte";
 let user = null;
 
 let roomid = $page.url.toString().split('/').pop().replace(/\?/g,'')
@@ -63,6 +64,7 @@ onValue(roomChange, async function (snapshot) {
 
 
 
+
 <br>
 <h1 class="title has-text-centered is-1">Your Room Code Is {roomid} <Login bind:resultuser={user}></Login></h1> 
 <div class="tile is-ancestor ">
@@ -85,8 +87,29 @@ onValue(roomChange, async function (snapshot) {
       <Chat class='column' user={user} messages={messages} db={db} roomid={roomid}></Chat>
     </div>
   </div>
+  <div class="tile is-parent">
+    <div class="tile is-child box">
+      <meta name="monetization" content="$ilp.uphold.com/egpErgzkYGw6">
+      <Money let:isLoading let:isMonetized>
+        {#if isLoading}
+          <div><p class="title is-4">Is Loading</p></div>
+        {:else if isMonetized}
+          <div>Monetized/premium content here</div>
+        {:else}
+          <h1 class="Title is-4">Make a coil account to access Premium Content and Remove Ads </h1>
+          <amp-ad width="100vw" height="320"
+     type="adsense"
+     data-ad-client="ca-pub-8897569169223812"
+     data-ad-slot="8144861906"
+     data-auto-format="rspv"
+     data-full-width="">
+  <div overflow=""></div>
+</amp-ad>
+        {/if}
+      </Money>
+    </div>
+  </div>
 </div>
-
 <style>
   .content.is-vcentered {
   display: flex;
