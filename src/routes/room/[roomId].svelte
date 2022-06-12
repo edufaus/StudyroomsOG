@@ -88,22 +88,17 @@ onValue(roomChange, async function (snapshot) {
       <Chat class='column' user={user} messages={messages} db={db} roomid={roomid}></Chat>
     </div>
   </div>
-  <div class="tile is-parent">
-    <div class="tile is-child box">
-      <meta name="monetization" content="$ilp.uphold.com/egpErgzkYGw6">
-      <Money let:isLoading let:isMonetized>
-        {#if isLoading}
-          <div><p class="title is-4">Loading/p></div>
-        {:else if isMonetized}
-          <div>No Ads :D</div>
-        {:else}
-          <h1 class="Title is-4">Make a coil account to Remove Ads </h1>
-          <Ad></Ad>
-        {/if}
-      </Money>
-    </div>
-  </div>
 </div>
+<Money let:isLoading let:isMonetized>
+  {#if isLoading}
+    <div><p class="title is-4">Loading/p></div>
+  {:else if isMonetized}
+    <div>No Ads :D</div>
+  {:else}
+    <h1 class="Title is-4">Make a coil account to Remove Ads </h1>
+    <Ad></Ad>
+  {/if}
+</Money>
 <style>
   .content.is-vcentered {
   display: flex;

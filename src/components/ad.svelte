@@ -1,8 +1,8 @@
 <script>
     import { onMount } from "svelte";
     onMount(() => {
-   (window.adsbygoogle = window.adsbygoogle || []).push({});
- });
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    });
 </script>
 
 <div class="ads-widget-container">
