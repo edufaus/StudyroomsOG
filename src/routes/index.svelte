@@ -1,26 +1,13 @@
-<!-- 
-<div id="aboutme" class="is-halfheight is-half" style="height:50%;">
-    <br>
-    <br>
-    <div class="columns is- half is-halfheight is-desktop">
-        <div class="column">
-            <figure class="image is-16x16 is-size-6" style=" height: auto; width: auto; max-width: 100%; max-height: 100%;">
-                <img alt="me" src="https://media.discordapp.net/attachments/984119111015628890/985273162533052416/bg-01.jpg?width=515&height=671">
-            </figure>
-            </div>
-        </div>
-        <div class="columns is-half is-halfheight is-mobile">
-            Hello
-        </div>
-</div> -->
+
 <head>
 <meta name="monetization" content="$ilp.uphold.com/egpErgzkYGw6">
 </head>
 <script>
     import { db } from "./room/database.js";
     import { ref, get, child } from "firebase/database";
-    import { GAUTH } from "../functions/verification";
-    // import { Player } from 'svelte-react-player';
+    import Music from ".././components/music.svelte";
+    import Login from ".././components/login.svelte";
+    let user = null;
     let roomId = 0;
     async function createRoom() {
       var randomRoomId = Math.floor(10000000 + Math.random() * 90000000);
@@ -61,13 +48,8 @@
           />
           <a href={"/room/" + roomId}><div class="button">Join Room</div></a>
           <div class="button" on:click={createRoom}>Generate Room</div>
-          <div class="button" on:click={GAUTH}>Authentication</div>
-          <audio controls style="margin-top:2%; ">
-            <source
-              src="https://coderadio-admin.freecodecamp.org/radio/8010/radio.mp3"
-              type="audio/mpeg"
-            />
-          </audio>
+          <Login bind:resultuser={user}></Login>
+          <Music></Music>
         </div>
       </div>
       <div class="column is-7-tablet is-7-desktop">
@@ -110,7 +92,6 @@
       />
       <a href={"/room/" + roomId}><div class="button">Join Room</div></a>
       <div class="button" on:click={createRoom}>Generate Room</div>
-      <div class="button" on:click={GAUTH}>Authentication</div>
       <audio controls style="margin-top: 2%;">
         <source
           src="https://coderadio-admin.freecodecamp.org/radio/8010/radio.mp3"

@@ -1,3 +1,8 @@
+
+
+
+
+
 <script>
 import {db} from "./database.js";
 
@@ -5,15 +10,20 @@ import { ref, set, onValue, get, child} from "firebase/database";
 import { page } from '$app/stores';
 import { goto } from '$app/navigation';
 import { onMount } from 'svelte';
+import { browser } from '$app/env';
 
 import Chat from "../../components/chat.svelte";
 import Todos from "../../components/todos.svelte";
 import Timer from "../../components/timer.svelte";
 import Music from "../../components/music.svelte";
+import Login from "../../components/login.svelte";
+let user = null;
 
-let roomid = $page.url.toString().split('/').pop()
+let roomid = $page.url.toString().split('/').pop().replace(/\?/g,'')
+
 
 onMount(async () => {
+  
     if (isNaN(roomid) || roomid.length != 8) {
         goto("/room/invalidId")
       }
@@ -41,7 +51,6 @@ let servertime = 0
 const roomChange = ref(db, "Rooms/"+roomid);
 onValue(roomChange, async function (snapshot) {
     if (snapshot.exists()) {
-      console.log(await snapshot.val());
       messages = await snapshot.val().Messages;
       delete messages["ignor"]
       todos = await snapshot.val().Todos;
@@ -50,8 +59,12 @@ onValue(roomChange, async function (snapshot) {
     }
   })
 </script>
+
+
+
+
 <br>
-<h1 class="title has-text-centered is-1">Your Room Code Is {roomid}</h1>
+<h1 class="title has-text-centered is-1">Your Room Code Is {roomid} <Login bind:resultuser={user}></Login></h1> 
 <div class="tile is-ancestor ">
   <div class="tile is-4 is-vertical is-parent">
     <div class="tile is-child box">
@@ -64,15 +77,16 @@ onValue(roomChange, async function (snapshot) {
   </div>
   <div class="tile is-parent">
     <div class="tile is-child box">
-      <Todos todos={todos} db={db} roomid={roomid}></Todos>
+      <Todos user={user} todos={todos} db={db} roomid={roomid}></Todos>
     </div>
   </div>
   <div class="tile is-parent">
     <div class="tile is-child box">
-      <Chat class='column' messages={messages} db={db} roomid={roomid}></Chat>
+      <Chat class='column' user={user} messages={messages} db={db} roomid={roomid}></Chat>
     </div>
   </div>
 </div>
+
 <style>
   .content.is-vcentered {
   display: flex;

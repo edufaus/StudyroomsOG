@@ -1,10 +1,11 @@
 <script>
     import { getDatabase, ref, set } from "firebase/database";
+    import Login from "./Login.svelte";
     import { v4 as genid } from 'uuid';
     export let messages = {}
     export let db;
     export let roomid;
-    export let username = "eduard faus"
+    export let user;
     let message = "";
     let sortmes = "";
     function sortmessages() {
@@ -18,24 +19,65 @@
         let tempmes = messages
 
         set(ref(db, "Rooms/"+roomid+"/Messages/"+genid()), {
-            "User":username,
+            "User":user.displayName,
             "Message": message,
             "Time": Date.now()
         })
+        message = ""
     }
 </script>
+
 <style>
+    .message{
+        background-color: #dddd;
+        color:#000;
+
+        padding-bottom: 15px;
+    }
+    .input{
+        flex:1;
+        height:40px;
+        border:none;
+        outline:none;
+        padding-left: 5px;
+        font-size: 16px;
+
+    }
+    .button{
+        width:auto;
+        font-size:18px;
+        border:none;
+        outline:none;
+        background-color:#3b5998;
+        color:white
+    }
+    .main-Chat{
+        max-height: 502px;
+    }
+
 </style>
-<div style="">
-    <br>
-    <h1 class="title">Chat</h1>
+
+<div class="main-Chat">
+    <h1 class="title" style="text-align: center;">Chat</h1>
     <hr>
-    {#each sortmessages(messages) as [key, value]}
+    <div class="message">
+        {#each sortmessages(messages) as [key, value]}
        {value.User}: {value.Message} <br>
     {/each}
+    </div>
     <br>
+    {#if user != null}
+
     <input bind:value={message} class="input" type="text" placeholder="Type a message...">
-    <button class="button" on:click={sendMessage}>Send Message</button>
+    <button style="color:white;"class="button" on:click={sendMessage}>Send Message</button>
+  
+    {:else}
+    To send a message  <Login></Login>
+    {/if}
+    
 </div>
+    
+
+
 
 

@@ -32,9 +32,9 @@
 		placeholder="Room Id"
 		bind:value={roomId}
 	  /> <br />
-	  <div class="button" on:click={createRoom}>Create Room</div>
-	  <p>Or</p>
 	  <a href={"/room/" + roomId}><div class="button">Join Room</div></a>
+	  <p>Or</p>
+	  <div class="button" on:click={createRoom}>Create Room</div>
 	</div>
   </div>
   
