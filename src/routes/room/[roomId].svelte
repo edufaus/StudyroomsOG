@@ -92,11 +92,11 @@ onValue(roomChange, async function (snapshot) {
       <meta name="monetization" content="$ilp.uphold.com/egpErgzkYGw6">
       <Money let:isLoading let:isMonetized>
         {#if isLoading}
-          <div><p class="title is-4">Is Loading</p></div>
+          <div><p class="title is-4">Loading/p></div>
         {:else if isMonetized}
-          <div>Monetized/premium content here</div>
+          <div>No Ads :D</div>
         {:else}
-          <h1 class="Title is-4">Make a coil account to access Premium Content and Remove Ads </h1>
+          <h1 class="Title is-4">Make a coil account to Remove Ads </h1>
           <amp-ad width="100vw" height="320"
      type="adsense"
      data-ad-client="ca-pub-8897569169223812"

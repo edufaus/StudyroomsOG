@@ -2,3 +2,4 @@ node_modules
 # src/routes/room/database.js
 musik/perfect.mp3
 .env
+DS_Store
