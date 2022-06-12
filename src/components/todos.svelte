@@ -1,7 +1,7 @@
 <script>
     import { getDatabase, ref, set } from "firebase/database";
     import { v4 as genid } from 'uuid';
-    import Login from "./Login.svelte";
+    import Login from "./login.svelte";
 
     export let todos = {}
     export let db;
