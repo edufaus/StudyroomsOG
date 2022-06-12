@@ -1,6 +1,6 @@
 <script>
     import { getDatabase, ref, set } from "firebase/database";
-    import Login from "./Login.svelte";
+    import Login from "./login.svelte";
     import { v4 as genid } from 'uuid';
     export let messages = {}
     export let db;
