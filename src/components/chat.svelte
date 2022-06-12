@@ -11,7 +11,7 @@
         let temp = Object.entries(messages)
             .sort(([,a],[,b]) => a.Time-b.Time)
             // .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
-        return temp
+        return temp.slice(-9)
     }
     function sendMessage() {
         if (message==""){return;}
@@ -25,18 +25,15 @@
     }
 </script>
 <style>
-    
-    .box{
-        border-radius: 50px;
-    }
-    
-
 </style>
-<div class="box">
-    
+<div style="">
+    <br>
+    <h1 class="title">Chat</h1>
+    <hr>
     {#each sortmessages(messages) as [key, value]}
-        {value.User}: {value.Message} <br>
+       {value.User}: {value.Message} <br>
     {/each}
+    <br>
     <input bind:value={message} class="input" type="text" placeholder="Type a message...">
     <button class="button" on:click={sendMessage}>Send Message</button>
 </div>

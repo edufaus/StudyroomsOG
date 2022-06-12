@@ -193,7 +193,7 @@
 
 </style>
   
-  <section class="box has-text-centered">
+  <section class="has-text-centered">
     <time>
       {formatTime(pomodoroTime)}
     </time>

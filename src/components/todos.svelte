@@ -31,7 +31,10 @@
     }
     console.log(todos)
 </script>
-<div class="box has-text-centered">
+<div class=" has-text-centered">
+    <h1 class="title"> Todos</h1>
+    <hr>
+    <br>
 <div class="columns is-multiline is-mobile">
     {#each  Object.entries(todos) as [key, value]}
     <div class="column">
