@@ -8,6 +8,7 @@ import { onMount } from 'svelte';
 
 import Chat from "../../components/chat.svelte";
 import Todos from "../../components/todos.svelte";
+import Timer from "../../components/timer.svelte";
 
 let roomid = $page.url.toString().split('/').pop()
 
@@ -50,3 +51,4 @@ onValue(roomChange, async function (snapshot) {
 </script>
 <Chat messages={messages} db={db} roomid={roomid}></Chat>
 <Todos todos={todos} db={db} roomid={roomid}></Todos>
+<Timer></Timer>
