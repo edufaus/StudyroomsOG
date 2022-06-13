@@ -1,5 +1,5 @@
 <script>
-    import { getDatabase, ref, set } from "firebase/database";
+    import { ref, set } from "firebase/database";
     import Login from "./login.svelte";
     import { v4 as genid } from 'uuid';
     export let messages = {}
@@ -11,7 +11,6 @@
     function sortmessages() {
         let temp = Object.entries(messages)
             .sort(([,a],[,b]) => a.Time-b.Time)
-            // .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
         return temp.slice(-9)
     }
     function sendMessage() {

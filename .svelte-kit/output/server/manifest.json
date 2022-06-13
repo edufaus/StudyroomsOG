@@ -37,22 +37,11 @@
     "isEntry": true,
     "imports": [
       "_index-6db6ab93.js",
-      "src/routes/room/database.js"
+      "src/routes/room/database.js",
+      "_login-434652ea.js"
     ],
     "css": [
-      "assets/entries/pages/index.svelte-0d5aa5c4.css"
-    ]
-  },
-  "src/routes/oldindex.svelte": {
-    "file": "entries/pages/oldindex.svelte.js",
-    "src": "src/routes/oldindex.svelte",
-    "isEntry": true,
-    "imports": [
-      "_index-6db6ab93.js",
-      "src/routes/room/database.js"
-    ],
-    "css": [
-      "assets/entries/pages/oldindex.svelte-ce736e5a.css"
+      "assets/entries/pages/index.svelte-93b000c3.css"
     ]
   },
   "src/routes/room/[roomId].svelte": {
@@ -61,10 +50,11 @@
     "isEntry": true,
     "imports": [
       "_index-6db6ab93.js",
-      "src/routes/room/database.js"
+      "src/routes/room/database.js",
+      "_login-434652ea.js"
     ],
     "css": [
-      "assets/entries/pages/room/_roomId_.svelte-e987cc63.css"
+      "assets/entries/pages/room/_roomId_.svelte-08b8616b.css"
     ]
   },
   "src/routes/room/invalidId.svelte": {
@@ -74,10 +64,19 @@
     "imports": [
       "_index-6db6ab93.js",
       "src/routes/room/database.js"
+    ],
+    "css": [
+      "assets/entries/pages/room/invalidId.svelte-d3bc183d.css"
     ]
   },
   "_index-6db6ab93.js": {
     "file": "chunks/index-6db6ab93.js"
+  },
+  "_login-434652ea.js": {
+    "file": "chunks/login-434652ea.js",
+    "imports": [
+      "_index-6db6ab93.js"
+    ]
   },
   ".svelte-kit/build/hooks.js": {
     "file": "chunks/hooks-1c45ba0b.js",

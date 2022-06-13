@@ -10,8 +10,6 @@ import { ref, set, onValue, get, child} from "firebase/database";
 import { page } from '$app/stores';
 import { goto } from '$app/navigation';
 import { onMount } from 'svelte';
-import { browser } from '$app/env';
-// import { sendMessage } from '../../functions/SMS.js';
 import Chat from "../../components/chat.svelte";
 import Todos from "../../components/todos.svelte";
 import Timer from "../../components/timer.svelte";
@@ -49,9 +47,8 @@ onMount(async () => {
       });
       }
 	});
-let messages = {}
-let todos = {}
-let servertime = 0
+let messages = {};
+let todos = {};
 const roomChange = ref(db, "Rooms/"+roomid);
 onValue(roomChange, async function (snapshot) {
     if (snapshot.exists()) {
@@ -119,8 +116,8 @@ onValue(roomChange, async function (snapshot) {
   .content.is-vcentered {
   display: flex;
   flex-wrap: wrap;
-  align-content: center; /* used this for multiple child */
-  align-items: center; /* if an only child */
+  align-content: center;
+  align-items: center; 
 }
 .image img {
     width: auto;

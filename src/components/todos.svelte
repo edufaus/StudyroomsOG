@@ -1,5 +1,5 @@
 <script>
-    import { getDatabase, ref, set } from "firebase/database";
+    import { ref, set } from "firebase/database";
     import { v4 as genid } from 'uuid';
     import Login from "./login.svelte";
 

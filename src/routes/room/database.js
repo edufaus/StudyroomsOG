@@ -1,5 +1,3 @@
-// import dotenv from 'dotenv/config';
-
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 // TODO: Replace the following with your app's Firebase project configuration

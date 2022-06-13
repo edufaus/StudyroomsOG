@@ -1,16 +1,15 @@
 export const manifest = {
 	appDir: "_app",
-	assets: new Set(["appicon.png","bg.jpg","favicon.png","manifest.json","oldfavicon.png"]),
-	mimeTypes: {".png":"image/png",".jpg":"image/jpeg",".json":"application/json"},
+	assets: new Set(["appicon.png","manifest.json","onehacks.png"]),
+	mimeTypes: {".png":"image/png",".json":"application/json"},
 	_: {
-		entry: {"file":"start-e42564a2.js","js":["start-e42564a2.js","chunks/index-61b7a329.js","chunks/singletons-d1fb5791.js"],"css":[]},
+		entry: {"file":"start-070fdfc1.js","js":["start-070fdfc1.js","chunks/index-c245ea12.js","chunks/singletons-d1fb5791.js"],"css":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),
 			() => import('./nodes/2.js'),
-			() => import('./nodes/3.js'),
-			() => import('./nodes/5.js'),
-			() => import('./nodes/4.js')
+			() => import('./nodes/4.js'),
+			() => import('./nodes/3.js')
 		],
 		routes: [
 			{
@@ -22,17 +21,6 @@ export const manifest = {
 				path: "/",
 				shadow: null,
 				a: [0,2],
-				b: [1]
-			},
-			{
-				type: 'page',
-				id: "oldindex",
-				pattern: /^\/oldindex\/?$/,
-				names: [],
-				types: [],
-				path: "/oldindex",
-				shadow: null,
-				a: [0,3],
 				b: [1]
 			},
 			{
@@ -51,7 +39,7 @@ export const manifest = {
 				types: [],
 				path: "/room/invalidId",
 				shadow: null,
-				a: [0,4],
+				a: [0,3],
 				b: [1]
 			},
 			{
@@ -62,7 +50,7 @@ export const manifest = {
 				types: [null],
 				path: null,
 				shadow: null,
-				a: [0,5],
+				a: [0,4],
 				b: [1]
 			}
 		],

@@ -2238,7 +2238,7 @@ function set_paths(paths) {
 }
 function set_prerendering(value) {
 }
-const template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		<meta name="monetization" content="$ilp.uphold.com/egpErgzkYGw6">\n		' + head + "\n	</head>\n	<body>\n		<div>" + body + "</div>\n	</body>\n</html>\n";
+const template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/appicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		<meta name="monetization" content="$ilp.uphold.com/egpErgzkYGw6">\n		' + head + "\n	</head>\n	<body>\n		<div>" + body + '</div>\n		<script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"><\/script>\n		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8897569169223812"\n     crossorigin="anonymous"><\/script>\n	</body>\n</html>\n';
 let read = null;
 set_paths({ "base": "", "assets": "" });
 let default_protocol = "https";

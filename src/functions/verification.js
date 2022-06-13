@@ -1,6 +1,5 @@
 import { GoogleAuthProvider, getAuth, signInWithPopup } from  'firebase/auth';
 import { browser } from '$app/env';
-import { writable } from 'svelte/store';
 
 
 export async function GAUTH() {
@@ -10,18 +9,12 @@ export async function GAUTH() {
     auth.languageCode = 'it';
     await signInWithPopup(auth, provider)
     .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken; // Access token for all of the juicy stuff such as name and pfp of the google account
         const user = result.user;
         if (browser) {
             sessionStorage.setItem('user', JSON.stringify(user));
         }
         return true;
     }).catch((error) => {
-        const errorCode = error.code; // Debugging
-        const errorMessage = error.message; // Debugging
-        const email = error.customData.email; // Debugging
-        const credential = GoogleAuthProvider.credentialFromError(error);
         return false;
     })
     return true;

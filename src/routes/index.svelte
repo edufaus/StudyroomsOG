@@ -7,12 +7,10 @@
     import { ref, get, child } from "firebase/database";
     import Music from ".././components/music.svelte";
     import Login from ".././components/login.svelte";
-	// import { sendMessage } from '../functions/SMS.js';
     let user = null;
     let roomId = 0;
     async function createRoom() {
       var randomRoomId = Math.floor(10000000 + Math.random() * 90000000);
-      const checkifexists = ref(db, "Rooms/" + randomRoomId.toString());
       get(child(ref(db), `Rooms/${roomId}`))
         .then((snapshot) => {
           if (snapshot.exists()) {
@@ -149,8 +147,8 @@
     .content.is-vcentered {
       display: flex;
       flex-wrap: wrap;
-      align-content: center; /* used this for multiple child */
-      align-items: center; /* if an only child */
+      align-content: center;
+      align-items: center; 
     }
   </style>
   
