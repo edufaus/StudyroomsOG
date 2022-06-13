@@ -100,7 +100,7 @@ onValue(roomChange, async function (snapshot) {
     <div>No Ads :D</div>
   {:else}
   <div>
-    <h1 class="Title is-4">Make a coil account to Remove Ads </h1>
+    <h1 class="Title is-4">Make a coil account to remove Ads </h1>
     <figure style="max-height=20vh" class="image is-16by9 has-text-centered center">
       <img
         style=""

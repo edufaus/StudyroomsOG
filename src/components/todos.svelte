@@ -65,7 +65,7 @@
     {/each}
 </div>
 {#if user != null}
-<input class="input" bind:value={todotext} placeholder="Todo Text">
+<input class="input" bind:value={todotext} placeholder="To-Do Text">
 <button on:click={addTodo} class="button">Add</button>
 {:else}
 <p>Please login to add todos</p>

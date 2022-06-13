@@ -34,8 +34,8 @@
           <div style="background-color: black;"class="hr" />
           <h1 style="color: black;">Virtual Study Rooms</h1>
           <p style="color: black; text-align: center;">
-            Create study rooms that have music, extensive todo lists, flashcards,
-            pommodoro timer, and a chat. Send study room code or share the link to
+            Create study rooms that have music, extensive todo lists,
+            pomodoro timer, and a chat. Send study room code or share the link to
             collaborate with others easily.
           </p>
           <br />
