@@ -1,4 +1,3 @@
-
 <head>
 <meta name="monetization" content="$ilp.uphold.com/egpErgzkYGw6">
 </head>
@@ -45,7 +44,7 @@
             maxlength="8"
             type="number"
             placeholder="RoomId"
-            blind:value={roomId}
+            bind:value={roomId}
           />
           <a href={"/room/" + roomId}><div class="button">Join Room</div></a>
           <div class="button" on:click={createRoom}>Generate Room</div>
@@ -90,7 +89,7 @@
         maxlength="8"
         type="number"
         placeholder="RoomId"
-        blind:value={roomId}
+        bind:value={roomId}
       />
      <div class="tryingtomakeresponsive">
       <a style="margin-bottom: 2%; margin-top: 1%;" href={"/room/" + roomId}><div class="button">Join Room</div></a>
