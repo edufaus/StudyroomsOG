@@ -3,23 +3,21 @@ import { getDatabase } from "firebase/database";
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
 
-let API_KEY = import.meta.env.VITE_apiKey;
-let AUTH_DOMAIN = import.meta.env.VITE_authDomain;
-let PROJECT_ID = import.meta.env.VITE_projectID;
-let STORAGE_BUCKET = import.meta.env.VITE_storageBucket;
-let MESSAGE_SENDER_ID = import.meta.env.VITE_messagingSenderID;
-let APP_ID = import.meta.env.VITE_appID;
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: API_KEY,
-  authDomain: AUTH_DOMAIN,
-  projectId: PROJECT_ID,
-  storageBucket: STORAGE_BUCKET,
-  messagingSenderId: MESSAGE_SENDER_ID,
-  appId: APP_ID
+  apiKey: "AIzaSyAtSk0LT5zsT5bINyAHeDsNKITFxoRRTaY",
+  authDomain: "westudy-b6e45.firebaseapp.com",
+  databaseURL: "https://westudy-b6e45-default-rtdb.firebaseio.com",
+  projectId: "westudy-b6e45",
+  storageBucket: "westudy-b6e45.appspot.com",
+  messagingSenderId: "651694035014",
+  appId: "1:651694035014:web:3a6849170771c6d2edfa47"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+// Initialize Firebase
+
 
 
 // Initialize Cloud Firestore and get a reference to the service
